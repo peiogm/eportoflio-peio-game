@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peio Game | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f6eeef;
+      --bg-2: #f0e3e6;
+      --bg-3: #ead4d8;
+      --card: #ffffff;
+      --line: rgba(32, 15, 20, 0.08);
+      --text: #1d1015;
+      --muted: #694b54;
+      --primary: #8d1d35;
+      --primary-2: #6a1228;
+      --gold: #d9b182;
+      --gold-2: #bf8f5e;
+      --green: #7a9a7b;
+      --shadow: 0 18px 50px rgba(28, 13, 18, 0.08);
+      --radius: 26px;
+      --container: 1200px;
+    }
+
+    *{ box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(141,29,53,0.10), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(217,177,130,0.10), transparent 22%),
+        linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a{ text-decoration: none; color: inherit; }
+    img{ display:block; max-width:100%; }
+    section{ scroll-margin-top: 100px; }
+
+    .container{
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .orb{
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(16px);
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one{
+      width: 320px; height: 320px;
+      background: rgba(141,29,53,0.14);
+      left: -80px; top: 40px;
+    }
+
+    .orb.two{
+      width: 280px; height: 280px;
+      background: rgba(217,177,130,0.14);
+      right: -40px; top: 260px;
+      animation-delay: 1.3s;
+    }
+
+    .orb.three{
+      width: 260px; height: 260px;
+      background: rgba(122,154,123,0.12);
+      left: 35%; bottom: 30px;
+      animation-delay: 2.2s;
+    }
+
+    @keyframes float{
+      0% { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(-20px) translateX(14px); }
+    }
+
+    header{
+      position: sticky;
+      top:0;
+      z-index:1000;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar{
+      height:72px;
+      display:grid;
+      grid-template-columns:1fr 1.8fr 0.8fr;
+      align-items:center;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-self:start;
+      min-width:0;
+    }
+
+    .brand-mark{
+      width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#fff; font-weight:900; box-shadow:0 10px 30px rgba(106,18,40,0.20); flex-shrink:0;
+    }
+
+    .brand-name{
+      font-weight:800; letter-spacing:0.03em; font-size:0.96rem; white-space:nowrap; color:var(--text);
+    }
+
+    .brand-sub{
+      display:block; margin-top:2px; color:var(--muted); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700;
+    }
+
+    .nav-center{
+      display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+
+    .nav-link{
+      padding:9px 12px; border-radius:999px; font-size:0.86rem; font-weight:700; color:var(--text);
+      transition:0.2s ease; border:1px solid transparent; background:rgba(255,255,255,0.35);
+    }
+
+    .nav-link:hover{
+      background: rgba(141,29,53,0.08); border-color: rgba(141,29,53,0.18);
+    }
+
+    .nav-right{
+      justify-self:end; display:flex; align-items:center; gap:12px;
+    }
+
+    .lang-switch{
+      display:inline-flex; align-items:center; gap:6px; padding:6px; border-radius:999px;
+      background: rgba(255,255,255,0.75); border:1px solid var(--line);
+    }
+
+    .lang-btn{
+      border:none; background:transparent; color:var(--muted); font-weight:800; border-radius:999px;
+      padding:7px 10px; cursor:pointer; transition:0.2s ease;
+    }
+
+    .lang-btn.active{
+      background: rgba(141,29,53,0.10); color: var(--primary-2);
+    }
+
+    .contacts-link{
+      padding:10px 16px; border-radius:999px; background:linear-gradient(135deg, rgba(141,29,53,0.10), rgba(217,177,130,0.10));
+      border:1px solid rgba(141,29,53,0.16); font-weight:800; transition:0.2s ease; white-space:nowrap; color:var(--text);
+    }
+
+    .contacts-link:hover{
+      transform: translateY(-1px);
+    }
+
+    main{
+      position:relative; z-index:1; padding:30px 0 80px;
+    }
+
+    .hero{
+      display:grid; grid-template-columns:1.4fr 1fr; gap:28px; background: rgba(255,255,255,0.94);
+      border:1px solid var(--line); border-radius:34px; overflow:hidden; box-shadow:var(--shadow); position:relative;
+    }
+
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(120deg, rgba(141,29,53,0.04), transparent 40%, rgba(217,177,130,0.05));
+      pointer-events:none;
+    }
+
+    .hero-left, .hero-right{ position:relative; z-index:1; }
+
+    .hero-left{ padding:48px 38px 28px; }
+
+    .eyebrow{
+      display:inline-flex; align-items:center; justify-content:center; padding:8px 12px; border-radius:999px;
+      color:var(--primary-2); background: rgba(141,29,53,0.08); border:1px solid rgba(141,29,53,0.14);
+      font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:800;
+    }
+
+    h1{
+      margin:18px 0 18px; font-size:clamp(2.8rem, 4vw, 5.4rem); line-height:0.98; letter-spacing:-0.06em; color:var(--text);
+    }
+
+    .gradient{
+      background: linear-gradient(135deg, var(--primary-2), #b44f5f, var(--gold));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .lead{
+      margin:0 0 24px; max-width:640px; font-size:1.02rem; color:var(--muted); line-height:1.8;
+    }
+
+    .cta-row{
+      display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; padding:14px 20px; border-radius:14px; font-weight:800;
+      letter-spacing:0.02em; transition: transform 0.2s ease; border:1px solid transparent; text-decoration:none;
+    }
+
+    .btn:hover{ transform: translateY(-2px); }
+
+    .btn.primary{
+      background: linear-gradient(135deg, var(--gold), var(--gold-2)); color:#1d1514; box-shadow:0 18px 30px rgba(217,177,130,0.22);
+    }
+
+    .btn.secondary{
+      background:#fff; border-color: var(--line); color: var(--text);
+    }
+
+    .hero-stats{ display:grid; grid-template-columns:repeat(3, minmax(100px, 1fr)); gap:14px; }
+    .stat{ background: rgba(255,255,255,0.8); border:1px solid var(--line); border-radius:18px; padding:16px 14px; }
+    .stat strong{ display:block; color:var(--primary-2); font-size:clamp(1.5rem,2vw,2.1rem); margin-bottom:4px; }
+    .stat span{ color:var(--muted); font-size:0.82rem; }
+
+    .hero-right{
+      display:flex; align-items:center; justify-content:center; padding:28px 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.90), rgba(245,248,252,0.98));
+      border-left:1px solid var(--line); position:relative;
+    }
+
+    .profile-card{
+      width:min(100%, 380px); background:rgba(255,255,255,0.98); border:1px solid var(--line);
+      border-radius:30px; box-shadow:var(--shadow); overflow:hidden; position:relative;
+    }
+
+    .profile-photo{
+      position:relative; height:305px; background: url('photo-peio.jpg') center/cover no-repeat;
+    }
+
+    .profile-photo::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(5,12,20,0.05), rgba(5,12,20,0.60));
+    }
+
+    .status-pill{
+      position:absolute; right:18px; bottom:18px; z-index:1; background: rgba(255,255,255,0.90);
+      border:1px solid rgba(141,29,53,0.15); border-radius:14px; padding:9px 12px; display:flex; align-items:center; gap:8px;
+      font-weight:700; color: var(--text);
+    }
+
+    .status-dot{
+      width:10px; height:10px; border-radius:50%; background: var(--green); box-shadow:0 0 12px rgba(122,154,123,0.9);
+    }
+
+    .profile-body{ padding:18px 18px 18px; }
+    .profile-body h3{
+      margin:0 0 8px; font-size:1.9rem; letter-spacing:-0.04em; color:var(--text);
+    }
+    .profile-body p{ margin:0; color:var(--muted); line-height:1.7; }
+
+    .chip-row{ margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; }
+    .chip-row span{
+      background: rgba(141,29,53,0.08); border:1px solid rgba(141,29,53,0.14); color:var(--primary-2);
+      border-radius:999px; padding:7px 10px; font-size:0.76rem; font-weight:700;
+    }
+
+    .section{
+      margin-top:34px; background: rgba(255,255,255,0.92); border:1px solid var(--line); border-radius:var(--radius);
+      box-shadow: var(--shadow); padding:26px; position:relative;
+    }
+
+    .section-header{
+      display:flex; justify-content:space-between; align-items:end; gap:18px; margin-bottom:18px;
+    }
+
+    .section-header h2{ margin:0; font-size:clamp(1.8rem, 2vw, 2.5rem); letter-spacing:-0.04em; color:var(--text); }
+    .section-header p{ margin:0; color:var(--muted); }
+
+    .video-box{
+      background: rgba(255,255,255,0.96);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:18px;
+      box-shadow: 0 12px 32px rgba(17, 19, 24, 0.05);
+    }
+
+    .video-box video{
+      display:block;
+      width:100%;
+      max-height:620px;
+      border-radius:18px;
+      background:#000;
+      object-fit:cover;
+    }
+
+    .grid-3{
+      display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px; margin-top:20px;
+    }
+
+    .card{
+      position:relative; background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,253,0.98));
+      border:1px solid var(--line); border-radius:22px; padding:20px; overflow:hidden; box-shadow:0 10px 30px rgba(20,35,49,0.02);
+    }
+
+    .card::before{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(141,29,53,0.04), transparent 40%, rgba(217,177,130,0.04));
+      pointer-events:none;
+    }
+
+    .card-tag{
+      position:relative; z-index:1; display:inline-flex; align-items:center; border-radius:999px; padding:6px 10px;
+      border:1px solid rgba(191,143,94,0.18); background: rgba(217,177,130,0.12); color:#9a6433;
+      font-weight:800; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;
+    }
+
+    .card h3{ position:relative; z-index:1; margin:0 0 10px; color:var(--text); font-size:1.38rem; letter-spacing:-0.03em; }
+    .card p{ position:relative; z-index:1; margin:0; color:var(--muted); line-height:1.8; }
+
+    .meta-list{
+      position:relative; z-index:1; margin-top:18px; display:grid; gap:10px;
+    }
+
+    .meta-item{
+      display:flex; justify-content:space-between; gap:12px; background: rgba(255,255,255,0.7);
+      border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:0.92rem; color:var(--text);
+    }
+
+    .meta-item span:first-child{ color:var(--muted); font-weight:600; }
+
+    .skills-box{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;
+    }
+
+    .skills-box span{
+      display:inline-flex; align-items:center; padding:8px 12px; border-radius:999px;
+      background: rgba(141,29,53,0.08); border:1px solid rgba(141,29,53,0.14); color: var(--primary-2);
+      font-size:0.8rem; font-weight:800;
+    }
+
+    .subtabs{
+      display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px;
+    }
+
+    .subtab-btn{
+      background: rgba(255,255,255,0.7); color: var(--text); border:1px solid var(--line); border-radius:999px; padding:9px 14px; font-weight:700; cursor:pointer;
+    }
+
+    .subtab-btn.active{
+      background: linear-gradient(135deg, rgba(141,29,53,0.10), rgba(217,177,130,0.08));
+      border-color: rgba(141,29,53,0.18); color:var(--text);
+    }
+
+    .subpanel{ display:none; }
+    .subpanel.active{ display:block; }
+
+    .contact-grid{
+      display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px; margin-top:18px;
+    }
+
+    .contact-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,253,0.98));
+      border:1px solid var(--line); border-radius:22px; padding:24px; box-shadow:0 12px 34px rgba(20,35,49,0.03);
+    }
+
+    .contact-icon{
+      width:58px; height:58px; border-radius:16px; display:grid; place-items:center; font-size:1.8rem;
+      background: linear-gradient(135deg, rgba(141,29,53,0.14), rgba(217,177,130,0.12));
+      border:1px solid rgba(141,29,53,0.12); margin-bottom:18px;
+    }
+
+    .contact-card h3{ margin:0 0 8px; font-size:1.4rem; color:var(--text); }
+    .contact-card p{ margin:0 0 18px; color:var(--muted); line-height:1.7; }
+
+    .contact-link{
+      display:inline-flex; align-items:center; justify-content:center; padding:11px 16px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(141,29,53,0.10), rgba(217,177,130,0.08));
+      border:1px solid rgba(141,29,53,0.12); color:var(--primary-2); font-weight:800;
+    }
+
+    .info-grid{
+      display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px; margin-top:18px;
+    }
+
+    .mini{
+      background: rgba(255,255,255,0.78); border:1px solid var(--line); border-radius:18px; padding:18px;
+    }
+
+    .mini .label{
+      display:block; color:var(--muted); font-size:0.72rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px;
+    }
+
+    .mini a, .mini span{
+      color:var(--text); font-weight:700; word-break:break-word;
+    }
+
+    footer{
+      text-align:center; color:var(--muted); padding:26px 0 42px;
+    }
+
+    @media (max-width:980px){
+      .topbar{ grid-template-columns:1fr; height:auto; padding:16px 0; }
+      .brand, .nav-right{ justify-self:center; }
+      .nav-center{ justify-content:center; }
+      .hero{ grid-template-columns:1fr; }
+      .hero-right{ border-left:none; border-top:1px solid var(--line); }
+      .grid-3{ grid-template-columns:1fr 1fr; }
+      .contact-grid, .info-grid{ grid-template-columns:1fr; }
+    }
+
+    @media (max-width:620px){
+      .nav-center{ gap:6px; }
+      .nav-link{ font-size:0.8rem; padding:9px 10px; }
+      .grid-3{ grid-template-columns:1fr; }
+      .hero-left{ padding:32px 22px 26px; }
+      .hero-stats{ grid-template-columns:1fr; }
+      .section-header{ flex-direction:column; align-items:flex-start; }
+      .contacts-link{ width:100%; text-align:center; }
+      .nav-right{ width:100%; justify-content:space-between; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <div class="brand-mark">PG</div>
+        <div class="brand-name">
+          Peio Game
+          <span class="brand-sub" data-i18n="portfolioLabel">Portfolio</span>
+        </div>
+      </div>
+
+      <nav class="nav-center" aria-label="Navigation principale">
+        <a href="#accueil" class="nav-link" data-i18n="navAccueil">Accueil</a>
+        <a href="#projets" class="nav-link" data-i18n="navProjets">Projets</a>
+        <a href="#mobilite" class="nav-link" data-i18n="navMobilite">Mobilité</a>
+        <a href="#engagements" class="nav-link" data-i18n="navEngagements">Engagements</a>
+        <a href="#sports" class="nav-link" data-i18n="navSports">Centres d’intérêts</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="lang-switch" aria-label="Langue">
+          <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <a href="#contacts" class="contacts-link" data-i18n="navContacts">Contacts</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="accueil" class="hero">
+      <div class="hero-left">
+        <div class="eyebrow" data-i18n="eyebrow">Mécanique des fluides • Énergie • Environnement</div>
+        <h1>
+          <span data-i18n="heroLine1">Ingénierie des</span>
+          <span class="gradient" data-i18n="heroLine2">systèmes</span>
+          <span data-i18n="heroLine3">pour un avenir plus propre.</span>
+        </h1>
+        <p class="lead" data-i18n="lead">
+          Passionné par les écoulements, j'aimerai au terme de mes études pouvoir me spécialiser dans l'aérodynamisme aéronautique.
+          Mon objectif est de concevoir des solutions utiles, performantes et durables pour des problématiques industrielles et environementales réelles.
+        </p>
+
+        <div class="cta-row">
+          <a href="#projets" class="btn primary" data-i18n="ctaProjet">Découvrir mes projets</a>
+          <a href="#contacts" class="btn secondary" data-i18n="ctaContact">Mes contacts</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="profile-card">
+          <div class="profile-photo">
+            <div class="status-pill"><span class="status-dot"></span> <span data-i18n="available">Disponible</span></div>
+          </div>
+          <div class="profile-body">
+            <h3>Peio Game</h3>
+            <p data-i18n="profileText">Étudiant ingénieur en mécanique des fluides, énergie et environnement à l'ENSEEIHT</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="elevator-pitch" class="section">
+      <div class="section-header">
+        <h2 data-i18n="elevatorPitchTitle">Elevator pitch</h2>
+      </div>
+
+      <div class="video-box">
+        <video controls preload="metadata" playsinline>
+          <source src="elevator_pitch.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <section id="projets" class="section">
+      <div class="section-header">
+        <h2 data-i18n="titleProjets">Projets</h2>
+        <p data-i18n="subtitleProjets">Études, simulations et solutions techniques</p>
+      </div>
+
+      <div class="subtabs">
+        <button class="subtab-btn active" data-subtab="projets-1" data-i18n="tipe32Tab">TIPE 3/2</button>
+        <button class="subtab-btn" data-subtab="projets-2" data-i18n="tipe52Tab">TIPE 5/2</button>
+        <button class="subtab-btn" data-subtab="projets-3" data-i18n="astreTab">Astre'Launch</button>
+        <button class="subtab-btn" data-subtab="projets-4" data-i18n="runningTab">Course à pied</button>
+      </div>
+
+      <div class="subpanel active" data-subpanel="projets-1">
+        <div class="card">
+          <span class="card-tag" data-i18n="tipe32Tag">TIPE 3/2</span>
+          <h3 data-i18n="tipe32Title">Etude de la rentrée atmosphérique d'une navette</h3>
+          <p data-i18n="tipe32Text">Ce TIPE avait pour but de réaliser une simulation de rentrée atmosphérique d'une navette spatiale dans un premier temps, de manière à observer l'influence des paramètres d'entrée (vitesse initiale, angle d'approche...). Nous avons ensuite réalisé une petite étude thermodynamique d'une tuile d'un bouclier thermique de ces navettes.</p>
+          <div class="meta-list">
+            <div class="meta-item"><span data-i18n="softwareUsed">Logiciels utilisés</span><strong data-i18n="tipe32Soft">python, solidworks</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="projets-2">
+        <div class="card">
+          <span class="card-tag" data-i18n="tipe52Tag">TIPE 5/2</span>
+          <h3 data-i18n="tipe52Title">Suspension à récupération d'énergie avec contrôle de l'effort</h3>
+          <p data-i18n="tipe52Text">Ce TIPE avait pour but de concevoir une mini suspension où le moteur venait remplacer la combinaison ressort-amortisseur. Il a donc été nécessaire d'en réaliser le montage dans un premier temps, puis de mettre en place un asservissement en intensité et de corriger le mouvement pour obtenir un fonctionnement similaire à une suspension réelle. Pour finir la récupération énergétique suite aux secousses a été étudié.</p>
+          <div class="meta-list">
+            <div class="meta-item"><span data-i18n="softwareUsed2">Logiciels utilisés</span><strong data-i18n="tipe52Soft">python, solidworks, matlab</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="projets-3">
+        <div class="card">
+          <span class="card-tag" data-i18n="astreTag">Astre'Launch</span>
+          <h3 data-i18n="astreTitle">module recovery</h3>
+          <p data-i18n="astreText">Etude et conception d'un parachute destinées à faire atterrir une fusée miniature dans le cadre de la compétition C'Space. Projet en cours.</p>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="projets-4">
+        <div class="card">
+          <span class="card-tag" data-i18n="runningTag">Course à pied</span>
+          <h3 data-i18n="runningTitle">projet personnel</h3>
+          <p data-i18n="runningText">Création d'un groupe de course d'une vingtaine de participants réguliers dans ma classe préparatoire. Conception de parcours et de séances adaptés aux objectifs de chacun. Je tire de ce projet une meilleure compréhension des mécaniques de courses et des planifications de séances, ce qui m'a permis d'améliorer mes records.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mobilite" class="section">
+      <div class="section-header">
+        <h2 data-i18n="titleMobilite">Mobilité</h2>
+        <p data-i18n="subtitleMobilite">Ouverture internationale et développement académique</p>
+      </div>
+
+      <div class="subtabs">
+        <button class="subtab-btn" data-subtab="mobilite-1" data-i18n="mobLv2">LV2</button>
+        <button class="subtab-btn" data-subtab="mobilite-2" data-i18n="mobEchanges">Échanges</button>
+      </div>
+
+      <div class="subpanel" data-subpanel="mobilite-1">
+        <div class="card">
+          <span class="card-tag" data-i18n="langTag">Langues</span>
+          <h3 data-i18n="langTitle">Anglais / Espagnol / Japonais</h3>
+          <p data-i18n="langText">Le développement des compétences linguistiques est essentiel pour travailler dans des environnements internationaux et communiquer avec des équipes variées.</p>
+          <div class="skills-box">
+            <span>Anglais C1</span>
+            <span>Espagnol B1</span>
+            <span>Japonais niveau débutant</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="mobilite-2">
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-tag" data-i18n="mobilityTag">Mobilité</span>
+            <h3 data-i18n="mob3Title">Université partenaire</h3>
+            <p data-i18n="mob3Text">J'aimerai me tourner vers deux pays en priorité pour ma mobilité internationale : Le Canada et le Japon.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="impactTag">Impact</span>
+            <h3 data-i18n="mob4Title">Ouverture d’esprit</h3>
+            <p data-i18n="mob4Text">Aller dans des pays aussi lointain me permettrait de découvrir un environnement de travail totalement différent ainsi que des cultures propres.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="goalTag">Objectif</span>
+            <h3 data-i18n="mob5Title">Développement global</h3>
+            <p data-i18n="mob5Text">Les mobilités me permettront de développer toujours plus mes connaissances en langues étrangères, mais surtout d'apprendre à utiliser de nouveaux outils dans l'objectif d'être plus polyvalent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="engagements" class="section">
+      <div class="section-header">
+        <h2 data-i18n="titleEngagements">Engagements</h2>
+        <p data-i18n="subtitleEngagements">Actions environnementales et sociales</p>
+      </div>
+
+      <div class="subtabs">
+        <button class="subtab-btn active" data-subtab="engagements-1" data-i18n="engEnv">Environnement</button>
+        <button class="subtab-btn" data-subtab="engagements-2" data-i18n="engCollectif">Collectif</button>
+      </div>
+
+      <div class="subpanel active" data-subpanel="engagements-1">
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-tag" data-i18n="eng1Tag">Transition</span>
+            <h3 data-i18n="eng1Title">Performance énergétique</h3>
+            <p data-i18n="eng1Text">Étude des solutions visant à améliorer la consommation énergétique des systèmes et à réduire les pertes.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="eng2Tag">Sensibilisation</span>
+            <h3 data-i18n="eng2Title">Énergie & environnement</h3>
+            <p data-i18n="eng2Text">Participation à des conférences et ateliers autour de la sobriété, de la transition énergétique et des enjeux environnementaux comme des clean walk ou la fresque du climat.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="eng3Tag">Impact</span>
+            <h3 data-i18n="eng3Title">Responsabilité</h3>
+            <p data-i18n="eng3Text">J’intègre les problématiques environnementales dans ma démarche technique afin de proposer des solutions plus durables.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="engagements-2">
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-tag" data-i18n="engStudentLifeTag">Vie étudiante</span>
+            <h3 data-i18n="engStudentLifeTitle">Vie étudiante</h3>
+            <p data-i18n="engStudentLifeText">J'ai été délégué durant mes trois années de classes préparatoires, puis Vice-Président de liste à mon entrée à l'ENSEEIHT, un rôle à la fois responsable et enrichissant.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="engGroupTag">Projets de groupe</span>
+            <h3 data-i18n="engGroupTitle">Projets de groupe</h3>
+            <p data-i18n="engGroupText">J'ai effectué deux TIPE en groupe et je suis également membre de l'association étudiante spatiale ASTRE.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="engVolunteerTag">Bénévolat</span>
+            <h3 data-i18n="engVolunteerTitle">Bénévolat</h3>
+            <p data-i18n="engVolunteerText">Mes activités sportives et civiques m'ont mené à faire du bénévolat dans des clubs de sport (athlétisme, judo, nautisme) ainsi que dans des actions solidaires avec l'association anti-HVSS 7fe Space.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sports" class="section">
+      <div class="section-header">
+        <h2 data-i18n="titleSports">Centres d’intérêts</h2>
+        <p data-i18n="subtitleSports">Disciplines, curiosités et exploration</p>
+      </div>
+
+      <div class="subtabs">
+        <button class="subtab-btn active" data-subtab="sports-1" data-i18n="sportTab">Sport</button>
+        <button class="subtab-btn" data-subtab="sports-2" data-i18n="cultureTab">Culture</button>
+        <button class="subtab-btn" data-subtab="sports-3" data-i18n="scienceTab">Sciences</button>
+      </div>
+
+      <div class="subpanel active" data-subpanel="sports-1">
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-tag" data-i18n="sportsRunningTag">Course à pieds</span>
+            <h3 data-i18n="sportsRunningTitle">Course à pieds</h3>
+            <p data-i18n="sportsRunningText">Je pratique la course à pied en compétition depuis l'âge de 5 ans. Ce sport m'a permis de développer une grande discipline et une forte envie d'explorer mon environnement.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="sportsMountainTag">Montagne</span>
+            <h3 data-i18n="sportsMountainTitle">Montagne</h3>
+            <p data-i18n="sportsMountainText">Dans la continuité de la course, la montagne me permet de poursuivre l'exploration à travers des randonnées et treks que je planifie moi-même.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="sportsOtherTag">Autres sports</span>
+            <h3 data-i18n="sportsOtherTitle">Autres sports</h3>
+            <p data-i18n="sportsOtherText">Je pratique également régulièrement la natation et la musculation pour compléter ma pratique de la course. J'ai pratiqué le judo pendant 6 ans jusqu'à la ceinture marron.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="sports-2">
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-tag" data-i18n="sportsCinemaTag">Cinéma</span>
+            <h3 data-i18n="sportsCinemaTitle">Cinéma</h3>
+            <p data-i18n="sportsCinemaText">Ma passion pour le cinéma me permet de découvrir une grande variété de cultures et de points de vue. C'est une passion qui facilite aussi les échanges avec mon entourage, notamment via Letterboxd et l'association 7ème Art.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-tag" data-i18n="sportsPhotoTag">Photographie</span>
+            <h3 data-i18n="sportsPhotoTitle">Photographie</h3>
+            <p data-i18n="sportsPhotoText">Mon goût pour le cinéma et ses visuels m'a conduit à m'intéresser à la photographie. Je fais partie de l'association Photo7 et je prends des photos lors des événements de l'école.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subpanel" data-subpanel="sports-3">
+        <div class="card">
+          <span class="card-tag" data-i18n="sportsScienceTag">Sciences</span>
+          <h3 data-i18n="sportsScienceTitle">Sciences</h3>
+          <p data-i18n="sportsScienceText">Les sciences, notamment la physique, l'aéronautique et les systèmes énergétiques, m'inspirent profondément. J'aime comprendre le fonctionnement du monde à travers des modèles, des expérimentations et des problématiques concrètes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="section">
+      <div class="section-header">
+        <h2 data-i18n="titleContacts">Contacts</h2>
+        <p data-i18n="subtitleContacts">Restons en contact</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">💼</div>
+          <h3 data-i18n="linkedinTitle">LinkedIn</h3>
+          <p data-i18n="linkedinText">Retrouvez mon parcours professionnel, mes projets et mes expériences liées à l’énergie, à la mécanique des fluides et à l’environnement.</p>
+          <a class="contact-link" href="https://www.linkedin.com/in/peïo-game-4433a1326" target="_blank" rel="noopener noreferrer" data-i18n="linkedinBtn">Voir le profil LinkedIn</a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">📄</div>
+          <h3 data-i18n="cvTitle">CV</h3>
+          <p data-i18n="cvText">Téléchargez mon CV pour en savoir plus sur mon parcours.</p>
+          <a class="contact-link" href="CV_Peio_Game.pdf" target="_blank" rel="noopener noreferrer" data-cv-link data-i18n="cvBtn">Télécharger mon CV</a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h3 data-i18n="mailCardTitle">Email</h3>
+          <p data-i18n="mailCardText">N'hésitez pas à me contacter pour échanger sur mes projets, mes expériences ou des opportunités.</p>
+          <a class="contact-link" href="mailto:peio.gamee@gmail.com?subject=Contact%20depuis%20le%20portfolio" target="_blank" rel="noopener noreferrer" data-i18n="mailCardBtn">Envoyer un email</a>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="mini">
+          <span class="label" data-i18n="githubLabel">GitHub</span>
+          <a href="https://github.com/peiogm" target="_blank" rel="noopener noreferrer">github.com/peiogm</a>
+        </div>
+
+        <div class="mini">
+          <span class="label" data-i18n="mailLabel">Email</span>
+          <a href="mailto:peio.gamee@gmail.com">peio.gamee@gmail.com</a>
+        </div>
+
+        <div class="mini">
+          <span class="label" data-i18n="locationLabel">Localisation</span>
+          <span data-i18n="locationValue">Toulouse, France</span>
+        </div>
+
+        <div class="mini">
+          <span class="label" data-i18n="cvMiniLabel">CV</span>
+          <a href="CV_Peio_Game.pdf" target="_blank" rel="noopener noreferrer" data-cv-mini-link data-i18n="cvMiniText">Télécharger mon CV</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2026 <span data-i18n="footerText">Portfolio - Peio Game</span>
+  </footer>
+
+  <script>
+    const cvFiles = {
+      fr: "CV_Peio_Game.pdf",
+      en: "Resume_Peio_Game.pdf"
+    };
+
+    const translations = {
+      fr: {
+        portfolioLabel: "Portfolio",
+        navAccueil: "Accueil",
+        navProjets: "Projets",
+        navMobilite: "Mobilité",
+        navEngagements: "Engagements",
+        navSports: "Centres d’intérêts",
+        navContacts: "Contacts",
+        eyebrow: "Mécanique des fluides • Énergie • Environnement",
+        heroLine1: "Ingénierie des",
+        heroLine2: "systèmes",
+        heroLine3: "pour un avenir plus propre.",
+        lead: "Passionné par les écoulements, j'aimerai au terme de mes études pouvoir me spécialiser dans l'aérodynamisme aéronautique. Mon objectif est de concevoir des solutions utiles, performantes et durables pour des problématiques industrielles et environementales réelles.",
+        ctaProjet: "Découvrir mes projets",
+        ctaContact: "Mes contacts",
+        available: "Disponible",
+        profileText: "Étudiant ingénieur en mécanique des fluides, énergie et environnement à l'ENSEEIHT",
+        titleProjets: "Projets",
+        subtitleProjets: "Études, simulations et solutions techniques",
+        tipe32Tab: "TIPE 3/2",
+        tipe52Tab: "TIPE 5/2",
+        astreTab: "Astre'Launch",
+        runningTab: "Course à pied",
+        tipe32Tag: "TIPE 3/2",
+        tipe32Title: "Etude de la rentrée atmosphérique d'une navette",
+        tipe32Text: "Ce TIPE avait pour but de réaliser une simulation de rentrée atmosphérique d'une navette spatiale dans un premier temps, de manière à observer l'influence des paramètres d'entrée (vitesse initiale, angle d'approche...). Nous avons ensuite réalisé une petite étude thermodynamique d'une tuile d'un bouclier thermique de ces navettes.",
+        softwareUsed: "Logiciels utilisés",
+        tipe32Soft: "python, solidworks",
+        tipe52Tag: "TIPE 5/2",
+        tipe52Title: "Suspension à récupération d'énergie avec contrôle de l'effort",
+        tipe52Text: "Ce TIPE avait pour but de concevoir une mini suspension où le moteur venait remplacer la combinaison ressort-amortisseur. Il a donc été nécessaire d'en réaliser le montage dans un premier temps, puis de mettre en place un asservissement en intensité et de corriger le mouvement pour obtenir un fonctionnement similaire à une suspension réelle. Pour finir la récupération énergétique suite aux secousses a été étudié.",
+        softwareUsed2: "Logiciels utilisés",
+        tipe52Soft: "python, solidworks, matlab",
+        astreTag: "Astre'Launch",
+        astreTitle: "module recovery",
+        astreText: "Etude et conception d'un parachute destinées à faire atterrir une fusée miniature dans le cadre de la compétition C'Space. Projet en cours.",
+        runningTag: "Course à pied",
+        runningTitle: "projet personnel",
+        runningText: "Création d'un groupe de course d'une vingtaine de participants réguliers dans ma classe préparatoire. Conception de parcours et de séances adaptés aux objectifs de chacun. Je tire de ce projet une meilleure compréhension des mécaniques de courses et des planifications de séances, ce qui m'a permis d'améliorer mes records.",
+        titleMobilite: "Mobilité",
+        subtitleMobilite: "Ouverture internationale et développement académique",
+        mobLv2: "LV2",
+        mobEchanges: "Échanges",
+        langTag: "Langues",
+        langTitle: "Anglais / Espagnol / Japonais",
+        langText: "Le développement des compétences linguistiques est essentiel pour travailler dans des environnements internationaux et communiquer avec des équipes variées.",
+        mobilityTag: "Mobilité",
+        mob3Title: "Université partenaire",
+        mob3Text: "J'aimerai me tourner vers deux pays en priorité pour ma mobilité internationale : Le Canada et le Japon.",
+        impactTag: "Impact",
+        mob4Title: "Ouverture d’esprit",
+        mob4Text: "Aller dans des pays aussi lointain me permettrait de découvrir un environnement de travail totalement différent ainsi que des cultures propres.",
+        goalTag: "Objectif",
+        mob5Title: "Développement global",
+        mob5Text: "Les mobilités me permettront de développer toujours plus mes connaissances en langues étrangères, mais surtout d'apprendre à utiliser de nouveaux outils dans l'objectif d'être plus polyvalent.",
+        titleEngagements: "Engagements",
+        subtitleEngagements: "Actions environnementales et sociales",
+        engEnv: "Environnement",
+        engCollectif: "Collectif",
+        eng1Tag: "Transition",
+        eng1Title: "Performance énergétique",
+        eng1Text: "Étude des solutions visant à améliorer la consommation énergétique des systèmes et à réduire les pertes.",
+        eng2Tag: "Sensibilisation",
+        eng2Title: "Énergie & environnement",
+        eng2Text: "Participation à des conférences et ateliers autour de la sobriété, de la transition énergétique et des enjeux environnementaux comme des clean walk ou la fresque du climat.",
+        eng3Tag: "Impact",
+        eng3Title: "Responsabilité",
+        eng3Text: "J’intègre les problématiques environnementales dans ma démarche technique afin de proposer des solutions plus durables.",
+        engStudentLifeTag: "Vie étudiante",
+        engStudentLifeTitle: "Vie étudiante",
+        engStudentLifeText: "J'ai été délégué durant mes trois années de classes préparatoires, puis Vice-Président de liste à mon entrée à l'ENSEEIHT, un rôle à la fois responsable et enrichissant.",
+        engGroupTag: "Projets de groupe",
+        engGroupTitle: "Projets de groupe",
+        engGroupText: "J'ai effectué deux TIPE en groupe et je suis également membre de l'association étudiante spatiale ASTRE.",
+        engVolunteerTag: "Bénévolat",
+        engVolunteerTitle: "Bénévolat",
+        engVolunteerText: "Mes activités sportives et civiques m'ont mené à faire du bénévolat dans des clubs de sport (athlétisme, judo, nautisme) ainsi que dans des actions solidaires avec l'association anti-HVSS 7fe Space.",
+        titleSports: "Centres d’intérêts",
+        subtitleSports: "Disciplines, curiosités et exploration",
+        sportTab: "Sport",
+        cultureTab: "Culture",
+        scienceTab: "Sciences",
+        sportsRunningTag: "Course à pieds",
+        sportsRunningTitle: "Course à pieds",
+        sportsRunningText: "Je pratique la course à pied en compétition depuis l'âge de 5 ans. Ce sport m'a permis de développer une grande discipline et une forte envie d'explorer mon environnement.",
+        sportsMountainTag: "Montagne",
+        sportsMountainTitle: "Montagne",
+        sportsMountainText: "Dans la continuité de la course, la montagne me permet de poursuivre l'exploration à travers des randonnées et treks que je planifie moi-même.",
+        sportsOtherTag: "Autres sports",
+        sportsOtherTitle: "Autres sports",
+        sportsOtherText: "Je pratique également régulièrement la natation et la musculation pour compléter ma pratique de la course. J'ai pratiqué le judo pendant 6 ans jusqu'à la ceinture marron.",
+        sportsCinemaTag: "Cinéma",
+        sportsCinemaTitle: "Cinéma",
+        sportsCinemaText: "Ma passion pour le cinéma me permet de découvrir une grande variété de cultures et de points de vue. C'est une passion qui facilite aussi les échanges avec mon entourage, notamment via Letterboxd et l'association 7ème Art.",
+        sportsPhotoTag: "Photographie",
+        sportsPhotoTitle: "Photographie",
+        sportsPhotoText: "Mon goût pour le cinéma et ses visuels m'a conduit à m'intéresser à la photographie. Je fais partie de l'association Photo7 et je prends des photos lors des événements de l'école.",
+        sportsScienceTag: "Sciences",
+        sportsScienceTitle: "Sciences",
+        sportsScienceText: "Les sciences, notamment la physique, l'aéronautique et les systèmes énergétiques, m'inspirent profondément. J'aime comprendre le fonctionnement du monde à travers des modèles, des expérimentations et des problématiques concrètes.",
+        titleContacts: "Contacts",
+        subtitleContacts: "Restons en contact",
+        linkedinTitle: "LinkedIn",
+        linkedinText: "Retrouvez mon parcours professionnel, mes projets et mes expériences liées à l’énergie, à la mécanique des fluides et à l’environnement.",
+        linkedinBtn: "Voir le profil LinkedIn",
+        cvTitle: "CV",
+        cvText: "Téléchargez mon CV pour en savoir plus sur mon parcours.",
+        cvBtn: "Télécharger mon CV",
+        mailCardTitle: "Email",
+        mailCardText: "N'hésitez pas à me contacter pour échanger sur mes projets, mes expériences ou des opportunités.",
+        mailCardBtn: "Envoyer un email",
+        githubLabel: "GitHub",
+        mailLabel: "Email",
+        locationLabel: "Localisation",
+        locationValue: "Toulouse, France",
+        cvMiniLabel: "CV",
+        cvMiniText: "Télécharger mon CV",
+        elevatorPitchTitle: "Elevator pitch",
+        footerText: "Portfolio - Peio Game"
+      },
+
+      en: {
+        portfolioLabel: "Portfolio",
+        navAccueil: "Home",
+        navProjets: "Projects",
+        navMobilite: "Mobility",
+        navEngagements: "Commitments",
+        navSports: "Interests",
+        navContacts: "Contact",
+        eyebrow: "Fluid Mechanics • Energy • Environment",
+        heroLine1: "Engineering",
+        heroLine2: "systems",
+        heroLine3: "for a cleaner future.",
+        lead: "Passionate about fluid dynamics, I would like to specialize in aeronautical aerodynamics by the end of my studies. My goal is to design useful, high-performing, and sustainable solutions to real industrial and environmental challenges.",
+        ctaProjet: "Discover my projects",
+        ctaContact: "My contact details",
+        available: "Available",
+        profileText: "Engineering student in fluid mechanics, energy, and environment at ENSEEIHT",
+        titleProjets: "Projects",
+        subtitleProjets: "Studies, simulations, and technical solutions",
+        tipe32Tab: "TIPE 3/2",
+        tipe52Tab: "TIPE 5/2",
+        astreTab: "Astre'Launch",
+        runningTab: "Running",
+        tipe32Tag: "TIPE 3/2",
+        tipe32Title: "Study of atmospheric reentry of a shuttle",
+        tipe32Text: "This TIPE aimed to create a simulation of the atmospheric reentry of a space shuttle at first, in order to observe the influence of entry parameters (initial speed, approach angle, etc.). We then carried out a small thermodynamic study of a tile from the thermal protection system of these shuttles.",
+        softwareUsed: "Software used",
+        tipe32Soft: "python, solidworks",
+        tipe52Tag: "TIPE 5/2",
+        tipe52Title: "Energy-recovery suspension with effort control",
+        tipe52Text: "This TIPE aimed to design a mini suspension in which the motor replaced the spring-damper combination. It was therefore necessary to assemble it first, then implement current control and correct the motion to obtain behavior similar to that of a real suspension. Finally, energy recovery from the shocks was studied.",
+        softwareUsed2: "Software used",
+        tipe52Soft: "python, solidworks, matlab",
+        astreTag: "Astre'Launch",
+        astreTitle: "recovery module",
+        astreText: "Study and design of a parachute intended to land a miniature rocket as part of the C'Space competition. Ongoing project.",
+        runningTag: "Running",
+        runningTitle: "personal project",
+        runningText: "Creation of a running group of around twenty regular participants in my preparatory class. Design of routes and sessions adapted to each person's goals. I gained a better understanding of running mechanics and session planning through this project, which helped me improve my records.",
+        titleMobilite: "Mobility",
+        subtitleMobilite: "International openness and academic development",
+        mobLv2: "Language",
+        mobEchanges: "Exchange programs",
+        langTag: "Languages",
+        langTitle: "English / Spanish / Japanese",
+        langText: "Developing language skills is essential for working in international environments and communicating with diverse teams.",
+        mobilityTag: "Mobility",
+        mob3Title: "Partner university",
+        mob3Text: "I would like to prioritize two countries for my international mobility: Canada and Japan.",
+        impactTag: "Impact",
+        mob4Title: "Open-mindedness",
+        mob4Text: "Going to countries so far away would allow me to discover a completely different working environment and distinct cultures.",
+        goalTag: "Goal",
+        mob5Title: "Global development",
+        mob5Text: "Mobility will allow me to further develop my foreign-language skills and, above all, learn to use new tools in order to become more versatile.",
+        titleEngagements: "Commitments",
+        subtitleEngagements: "Environmental and social actions",
+        engEnv: "Environment",
+        engCollectif: "Community",
+        eng1Tag: "Transition",
+        eng1Title: "Energy performance",
+        eng1Text: "Study of solutions to improve system energy consumption and reduce losses.",
+        eng2Tag: "Awareness",
+        eng2Title: "Energy & environment",
+        eng2Text: "Participation in conferences and workshops on sobriety, the energy transition, and environmental issues such as climate workshops and clean walks.",
+        eng3Tag: "Impact",
+        eng3Title: "Responsibility",
+        eng3Text: "I integrate environmental issues into my technical approach in order to propose more sustainable solutions.",
+        engStudentLifeTag: "Student life",
+        engStudentLifeTitle: "Student life",
+        engStudentLifeText: "I was a delegate during my three years of preparatory classes, and later became Vice-President of the list when I entered ENSEEIHT, a role that was both responsible and enriching.",
+        engGroupTag: "Group projects",
+        engGroupTitle: "Group projects",
+        engGroupText: "I completed two group-based TIPE projects and I am also a member of the student space association ASTRE.",
+        engVolunteerTag: "Volunteer work",
+        engVolunteerTitle: "Volunteer work",
+        engVolunteerText: "My sporting and civic activities led me to volunteer both in sports clubs (athletics, judo, sailing) and in solidarity actions with the anti-HVSS association 7fe Space.",
+        titleSports: "Interests",
+        subtitleSports: "Disciplines, curiosity, and exploration",
+        sportTab: "Sport",
+        cultureTab: "Culture",
+        scienceTab: "Science",
+        sportsRunningTag: "Running",
+        sportsRunningTitle: "Running",
+        sportsRunningText: "I have been practicing competitive running since I was 5 years old. This sport helped me build discipline and a strong desire to explore my environment.",
+        sportsMountainTag: "Mountain",
+        sportsMountainTitle: "Mountain",
+        sportsMountainText: "In line with running, the mountain allows me to continue exploring through hikes and treks that I plan myself.",
+        sportsOtherTag: "Other sports",
+        sportsOtherTitle: "Other sports",
+        sportsOtherText: "I also regularly practice swimming and weight training to complement my running. I practiced judo for 6 years until I reached the brown belt.",
+        sportsCinemaTag: "Cinema",
+        sportsCinemaTitle: "Cinema",
+        sportsCinemaText: "My passion for cinema allows me to discover a wide variety of cultures and perspectives. It is a passion that also enables exchanges with those around me, notably through Letterboxd and the 7th Art association.",
+        sportsPhotoTag: "Photography",
+        sportsPhotoTitle: "Photography",
+        sportsPhotoText: "My love for cinema and its visuals led me to become interested in photography. I am part of the Photo7 association and take photos at school events.",
+        sportsScienceTag: "Science",
+        sportsScienceTitle: "Science",
+        sportsScienceText: "Science, especially physics, aeronautics, and energy systems, profoundly inspires me. I enjoy understanding how the world works through models, experiments, and concrete problems.",
+        titleContacts: "Contact",
+        subtitleContacts: "Stay in touch",
+        linkedinTitle: "LinkedIn",
+        linkedinText: "Discover my professional journey, my projects, and my experiences related to energy, fluid mechanics, and the environment.",
+        linkedinBtn: "View LinkedIn profile",
+        cvTitle: "Resume",
+        cvText: "Download my resume to learn more about my background.",
+        cvBtn: "Download my resume",
+        mailCardTitle: "Email",
+        mailCardText: "Feel free to contact me to discuss my projects, my experience, or opportunities.",
+        mailCardBtn: "Send an email",
+        githubLabel: "GitHub",
+        mailLabel: "Email",
+        locationLabel: "Location",
+        locationValue: "Toulouse, France",
+        cvMiniLabel: "Resume",
+        cvMiniText: "Download my resume",
+        elevatorPitchTitle: "Elevator pitch",
+        footerText: "Portfolio - Peio Game"
+      }
+    };
+
+    function updateCvLinks(lang) {
+      document.querySelectorAll("[data-cv-link]").forEach((link) => {
+        link.setAttribute("href", cvFiles[lang]);
+      });
+
+      document.querySelectorAll("[data-cv-mini-link]").forEach((link) => {
+        link.setAttribute("href", cvFiles[lang]);
+      });
+    }
+
+    const langButtons = document.querySelectorAll(".lang-btn");
+    const i18nNodes = document.querySelectorAll("[data-i18n]");
+    let currentLang = "fr";
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      i18nNodes.forEach((node) => {
+        const key = node.dataset.i18n;
+        if (translations[lang] && translations[lang][key]) {
+          node.textContent = translations[lang][key];
+        }
+      });
+
+      updateCvLinks(lang);
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+    }
+
+    langButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        applyLanguage(button.dataset.lang);
+      });
+    });
+
+    document.querySelectorAll(".subtab-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.subtab;
+
+        document.querySelectorAll(".subtab-btn").forEach(btn => {
+          btn.classList.toggle("active", btn === button);
+        });
+
+        document.querySelectorAll(".subpanel").forEach(panel => {
+          panel.classList.toggle("active", panel.dataset.subpanel === target);
+        });
+      });
+    });
+
+    applyLanguage("fr");
+  </script>
+</body>
+</html>
